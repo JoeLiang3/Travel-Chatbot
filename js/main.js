@@ -9,13 +9,30 @@ var numberResults = 5;
 var originBool = true;
 var departureBool = true;
 var loadMore = 0
+
+
+if (!('contains' in String.prototype)) String.prototype.contains = function (str, startIndex) {
+    return -1 !== String.prototype.indexOf.call(this, str, startIndex);
+};
+
 $(document).ready(function () { // start js once document loads
  Chat("");
- 
+ $('#usermsg').bind("keypress", function(e) {
+        if (e.keyCode == 13) {
+            inputSent();
+            return false; // prevent the button click from happening
+        }
+});
   
 });
 function Chat (input){
-  if (input == ""){
+  if (input.contains("yes") || input.contains("Yes")){
+    var message = "Here are more results!"
+    sendMessage(message);
+    loadMore += 1;
+    getPrices();
+  }
+  else if (input == ""){
     var message = "Hi, welcome to flight tracker. Please tell us the code of the departure airport.";
     sendMessage(message);
   }
@@ -31,7 +48,7 @@ function Chat (input){
     sendMessage(message);
     destination = input; 
   }
-  else if (input.contains("adults")){
+  else if (input.contains("adults") || input.length < 3){
     var message = "When are you planning to leave?";
     sendMessage(message);
     adults = input;
@@ -41,7 +58,15 @@ function Chat (input){
     sendMessage(message);
     departureBool = !departureBool
     var date = input.split("/");
-    var departureDate = "20" + input[2] + "-" + input[0] + "-" + input[1];
+    console.log(date);
+    if (date[0].length == 1){
+      date[0] = "0" + date[0];
+    }
+    if (date[1].length == 1){
+      date[1] = "0" + date[1];
+    }
+    var departureDate = "20" + date[2] + "-" + date[0] + "-" + date[1];
+    console.log(departureDate);
     departure = departureDate;
   }
   else if (input.contains("/") && !departureBool){
@@ -49,20 +74,20 @@ function Chat (input){
     sendMessage(message);
     departureBool = !departureBool
     var date = input.split("/");
-    var returnDate = "20" + input[2] + "-" + input[0] + "-" + input[1] + "T23%3A59";
-    returnsBy = returnDate;
-    getPrices();
-  }
-  else if (input.contains("yes") || input.contains("Yes")){
-    var message = "Here are more results!"
-    sendMessage(message);
-    loadMore += 1;
+    if (date[0].length == 1){
+      date[0] = "0" + date[0];
+    }
+    if (date[1].length == 1){
+      date[1] = "0" + date[1];
+    }
+    var returnDate = "20" + date[2] + "-" + date[0] + "-" + date[1] + "T23%3A59";
+    returnBy = returnDate;
     getPrices();
   }
 }
 function getPrices(){
     
-  var beginURL = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search/v1.2/flights/low-fare-search?    apikey=NNd0iA0mK7NWdWJreIepC8Heb41azLry";
+  var beginURL = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search/v1.2/flights/low-fare-search?apikey=NNd0iA0mK7NWdWJreIepC8Heb41azLry";
   var URL = beginURL + "&origin=" + origin + "&destination=" + destination + "&departure_date=" + departure
             + "&return_by=" + returnBy + "&adults=" + adults + "&children=" + children + "&max_price=" +
             max_price + "&number_of_results=" + numberResults + " HTTP/1.1";
@@ -71,39 +96,46 @@ function getPrices(){
   $.getJSON(URL, function(data) {
     console.log(data);
     console.log(data.results[1].fare.total_price);
-    var message = "Here is the cheapest plane ticket fitting your criteria:" + data.results[loadMore].fare.total_price;
+    var message = "Here is the cheapest plane ticket fitting your criteria: $" + data.results[loadMore].fare.total_price;
     sendMessage(message);
     message = "Do you want to load more results?"
     sendMessage(message);
   });
 }
-function addInput () {
+function addInput (input) {
   // create a new div element 
   // and give it some content 
-  var base = document.getElementsByName('height')[0].value;
+  //var base = document.getElementsByName('height')[0].value;
   var newDiv = document.createElement("div"); 
-  var newContent = document.createTextNode(base); 
+  newDiv.className = "input";
+  console.log(input);
+  var newContent = document.createTextNode(input); 
   newDiv.appendChild(newContent); //add the text node to the newly created div. 
   
   // add the newly created element and its content into the DOM 
-  var currentDiv = document.getElementById("div1"); 
-  document.body.insertBefore(newDiv, currentDiv);
-  document.getElementById("bar").value = "";
+  var currentDiv = document.getElementById("chatbox"); 
+  var parentDiv = currentDiv.parentNode;
+  parentDiv.insertBefore(newDiv, currentDiv);
+  document.getElementById("chatbox").value = "";
 }
 function sendMessage (Output) {
   // create a new div element 
   // and give it some content 
   //var base = document.getElementsByName('height')[0].value;
   var newDiv = document.createElement("div"); 
+  newDiv.className = "output";
   var newContent = document.createTextNode(Output); 
   newDiv.appendChild(newContent); //add the text node to the newly created div. 
   
   // add the newly created element and its content into the DOM 
-  var currentDiv = document.getElementById("div1"); 
-  document.body.insertBefore(newDiv, currentDiv);
-  document.g  etElementById("bar").value = "";
+  var currentDiv = document.getElementById("chatbox"); 
+  var parentDiv = currentDiv.parentNode;
+  parentDiv.insertBefore(newDiv, currentDiv);
+  document.getElementById("chatbox").value = "";
 }
 function inputSent () {
-  var input = document.getElementById('usermsg');
-  console.log(input);
+  var input = document.getElementById('usermsg').value.toString();
+  document.getElementById('usermsg').value="";
+  addInput(input);
+  Chat(input);
 }
