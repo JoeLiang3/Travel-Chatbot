@@ -10,23 +10,10 @@ var originBool = true;
 var departureBool = true;
 var loadMore = 0
 $(document).ready(function () { // start js once document loads
-
+ Chat("");
  
-  var beginURL = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search/v1.2/flights/low-fare-search?apikey=NNd0iA0mK7NWdWJreIepC8Heb41azLry";
-  var URL = beginURL + "&origin=" + origin + "&destination=" + destination + "&departure_date=" + departure
-            + "&return_by=" + returnBy + "&adults=" + adults + "&children=" + children + "&max_price=" +
-            max_price + "&number_of_results=" + numberResults + " HTTP/1.1";
   
-  
-  $.getJSON(URL, function(data) {
-    console.log(data);
-    console.log(data.results[1].fare.total_price);
-    for (var i = 0; i < data.results.length; i++){
-      console.log(data.results[i].fare.total_price);
-    }
-  });
 });
-
 function Chat (input){
   if (input == ""){
     var message = "Hi, welcome to flight tracker. Please tell us the code of the departure airport.";
@@ -89,4 +76,34 @@ function getPrices(){
     message = "Do you want to load more results?"
     sendMessage(message);
   });
+}
+function addInput () {
+  // create a new div element 
+  // and give it some content 
+  var base = document.getElementsByName('height')[0].value;
+  var newDiv = document.createElement("div"); 
+  var newContent = document.createTextNode(base); 
+  newDiv.appendChild(newContent); //add the text node to the newly created div. 
+  
+  // add the newly created element and its content into the DOM 
+  var currentDiv = document.getElementById("div1"); 
+  document.body.insertBefore(newDiv, currentDiv);
+  document.getElementById("bar").value = "";
+}
+function sendMessage (Output) {
+  // create a new div element 
+  // and give it some content 
+  //var base = document.getElementsByName('height')[0].value;
+  var newDiv = document.createElement("div"); 
+  var newContent = document.createTextNode(Output); 
+  newDiv.appendChild(newContent); //add the text node to the newly created div. 
+  
+  // add the newly created element and its content into the DOM 
+  var currentDiv = document.getElementById("div1"); 
+  document.body.insertBefore(newDiv, currentDiv);
+  document.g  etElementById("bar").value = "";
+}
+function inputSent () {
+  var input = document.getElementById('usermsg');
+  console.log(input);
 }
