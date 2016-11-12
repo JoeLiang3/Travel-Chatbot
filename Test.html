@@ -4,7 +4,7 @@
 #bar {
     
     padding:12px 20px;
-    margin-left: 130px;
+    margin:10px 5px 15px 130px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 0px;
@@ -27,7 +27,7 @@
     bottom: 10px;
     width: 50%;
 }
-    #base {
+  #base {
     
     background-color: #4CAF50;
     color: white;
@@ -46,6 +46,33 @@
      border: 3px solid green;
      padding: 10px
     }
+.input{
+
+    color: black;
+    padding: 14px 40px;
+    margin: 10px auto 10px;
+    border: 3px solid green;
+    border-radius: 100px;
+    cursor: pointer;
+    
+    bottom: 10px;
+    width: 25%;
+  }
+  
+  .output{
+    background-color: #d6d6c2;
+    color: black;
+    padding: 14px 20px;
+    margin:10px auto 10px;
+    border: 3px solid green;
+    border-radius: 100px;
+    cursor: pointer;
+    
+    bottom: 10px;
+    width: 25%;
+  
+  
+  }
 </style>
 <script>
     function addElement () {
@@ -53,6 +80,7 @@
   // and give it some content 
   var base = document.getElementsByName('height')[0].value;
   var newDiv = document.createElement("div"); 
+  newDiv.className = "input";
   var newContent = document.createTextNode(base); 
   newDiv.appendChild(newContent); //add the text node to the newly created div. 
   
