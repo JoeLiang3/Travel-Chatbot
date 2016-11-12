@@ -30,7 +30,7 @@ function Chat (input){
     var message = "Here are more results!"
     sendMessage(message);
     loadMore += 1;
-    getPrices();
+    getAirlinePrices();
   }
   else if (input == ""){
     var message = "Hi, welcome to flight tracker. Please tell us the code of the departure airport.";
@@ -82,10 +82,10 @@ function Chat (input){
     }
     var returnDate = "20" + date[2] + "-" + date[0] + "-" + date[1] + "T23%3A59";
     returnBy = returnDate;
-    getPrices();
+    getAirlinePrices();
   }
 }
-function getPrices(){
+function getAirlinePrices(){
     
   var beginURL = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search/v1.2/flights/low-fare-search?apikey=NNd0iA0mK7NWdWJreIepC8Heb41azLry";
   var URL = beginURL + "&origin=" + origin + "&destination=" + destination + "&departure_date=" + departure
@@ -96,12 +96,43 @@ function getPrices(){
   $.getJSON(URL, function(data) {
     console.log(data);
     console.log(data.results[1].fare.total_price);
+    console.log(data.results[0].itineraries[0].outbound.flights[0].arrives_at);
+    var arrival = data.results[loadMore].itineraries[loadMore].outbound.flights[loadMore].arrives_at;
+    arrival = arrival.split("T")[0];
+    var depart = data.results[loadMore].itineraries[loadMore].inbound.flights[loadMore].departs_at;
+    depart = depart.split("T")[0];
     var message = "Here is the cheapest plane ticket fitting your criteria: $" + data.results[loadMore].fare.total_price;
+    sendMessage(message);
+    getHotelPrices(arrival, depart, data.results[loadMore].fare.total_price);
+
+  });
+}
+
+
+
+function getHotelPrices(arrival, depart, airfare){
+    
+  var beginURL = "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=NNd0iA0mK7NWdWJreIepC8Heb41azLry";
+   // &location=BOS&check_in=2016-11-15&check_out=2016-11-16&number_of_results=5"
+  var URL = beginURL + "&location=" + destination + "&check_in=" + arrival + "&check_out=" + depart +"&number_of_results=5";
+  
+  
+  $.getJSON(URL, function(data) {
+    console.log(data);
+    console.log(data.results[loadMore].total_price.amount);
+    var message = "Here is the cheapest hotel fitting your criteria: $" + data.results[loadMore].total_price.amount;
+    sendMessage(message);
+    var totalPrice = parseFloat(airfare) + parseFloat(data.results[loadMore].total_price.amount);
+    message = "Flight and Hotel expenses add up to $" + totalPrice.toFixed(2);
     sendMessage(message);
     message = "Do you want to load more results?"
     sendMessage(message);
   });
 }
+
+
+
+
 function addInput (input) {
   // create a new div element 
   // and give it some content 
