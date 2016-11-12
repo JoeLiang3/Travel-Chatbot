@@ -30,11 +30,31 @@
     <header id="top" class="header">
         <div class="text-vertical-center">
             <h1>Travel Chat</h1>
+            <div id="wrapper">
+    <div id="menu">
+        
+        <p class="welcome">Welcome, where do you plan to visit? <b></b></p>
+        <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+        <div style="clear:both"></div>
+    </div>
+     
+    <div id="chatbox"></div>
+     
+    <form name="message" action="">
+        <input name="usermsg" type="text" id="usermsg" size="100" />
+        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+    </form>
+</div>
             <br>
         </div>
     </header>
+    
 
 
 </body>
 
 </html>
+var message = $('textarea').val();
+                var old= $('#content').html();
+                
+                $('#content').html(old + '<p>' + message '</p>');
