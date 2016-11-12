@@ -57,12 +57,13 @@ function Chat (input){
     departure = departureDate;
   }
   else if (input.contains("/") && !departureBool){
-    var message = "When are you planning to return?";
+    var message = "Thanks for the information! Loading your results!";
     sendMessage(message);
     departureBool = !departureBool
     var date = input.split("/");
     var departureDate = "20" + input[2] + "-" + input[0] + "-" + input[1] + "T23%3A59";
     returnsBy = returnsBy;
+    getPrice();
   }
   
 }
