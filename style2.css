@@ -1,0 +1,147 @@
+* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+h1{
+    color:#433DEF;
+    font-family: 'Merienda One', cursive;
+    margin-top:90px;
+    text-align:center;
+    padding:1em;
+    font-size:31px;
+}
+
+#bar {
+    
+    padding:12px 20px;
+    margin:10px 5px 15px 130px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    box-sizing: border-box;
+    
+    bottom: 500px;
+    width: 50%;
+    font-size: 30
+}
+#sent {
+    
+    background-color: #76C9ED;
+    color: white;
+    padding: 14px 20px;
+    margin-left: 130px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    bottom: 10px;
+    width: 50%;
+}
+  #base {
+    
+    background-color: #76C9ED;
+    color: white;
+    padding: 14px 20px;
+    margin-left: 130px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    bottom: 10px;
+    width: 50%;
+}
+#bottm{
+     margin: auto;
+     width: 50%;
+     border: 3px solid lightblue;
+     padding: 10px
+    }
+.input{
+  background-color: lightblue;
+    color: black;
+    padding: 14px 40px;
+    margin: 10px auto 10px;
+    border: 3px solid lightblue;
+    border-radius: 100px;
+    cursor: pointer;
+    
+    bottom: 10px;
+    width: 25%;
+  }
+  
+  .output{
+    background-color: blue;
+    color: white;
+    padding: 14px 20px;
+    margin:10px auto 10px;
+    border: 3px solid lightblue;
+    border-radius: 100px;
+    cursor: pointer;
+    
+    bottom: 10px;
+    width: 25%;
+  
+  
+  }
+
+
+#message button{margin:1em 0 0 0;}
+
+#message textarea{border:1px solid #16526C; font-family: Tahoma, sans-serif;}
+
+button{
+    border:none;
+    padding:6px;
+    text-decoration:none;
+    -moz-border-radius:4px;
+    background:#72D2FB;
+    color:white;
+    -moz-box-shadow:0 1px 0 black;
+    cursor:pointer;
+    }
