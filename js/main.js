@@ -97,7 +97,7 @@ function getAirlinePrices(){
     console.log(data);
     console.log(data.results[1].fare.total_price);
     console.log(data.results[0].itineraries[0].outbound.flights[0].arrives_at);
-    var arrival = data.results[loadMore].itineraries[loadMore].outbound.flights[loadMore].arrives_at;
+    var arrival = data.results[loadMore].itineraries[0].outbound.flights[0].arrives_at;
     arrival = arrival.split("T")[0];
     var depart = data.results[loadMore].itineraries[loadMore].inbound.flights[loadMore].departs_at;
     depart = depart.split("T")[0];
