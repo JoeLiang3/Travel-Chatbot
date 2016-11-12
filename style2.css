@@ -48,13 +48,13 @@ table {
 	border-spacing: 0;
 }
 
-h1{
+/*h1{
     color:#433DEF;
     font-family: 'Merienda One', cursive;
     margin-top:90px;
     text-align:center;
     padding:1em;
-    font-size:31px;
+    font-size:31px;*/
 }
 
 #bar {
@@ -103,7 +103,7 @@ h1{
      padding: 10px
     }
 .input{
-  background-color: lightblue;
+  background-color: rgba(148, 218, 224, .8);
     color: black;
     padding: 14px 40px;
     margin: 10px auto 10px;
@@ -112,12 +112,13 @@ h1{
     cursor: pointer;
     
     bottom: 10px;
-    width: 25%;
+    width: 45%;
   }
   
   .output{
-    background-color: blue;
-    color: white;
+    background-color: lightblue;
+    opacity: .9;
+    color: black;
     padding: 14px 20px;
     margin:10px auto 10px;
     border: 3px solid lightblue;
@@ -125,7 +126,7 @@ h1{
     cursor: pointer;
     
     bottom: 10px;
-    width: 25%;
+    width: 45%;
   
   
   }
@@ -133,7 +134,7 @@ h1{
 
 #message button{margin:1em 0 0 0;}
 
-#message textarea{border:1px solid #16526C; font-family: Tahoma, sans-serif;}
+/*#message textarea{border:1px solid #16526C; font-family: Tahoma, sans-serif;}*/
 
 button{
     border:none;

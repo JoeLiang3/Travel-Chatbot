@@ -117,6 +117,8 @@ function addInput (input) {
   var parentDiv = currentDiv.parentNode;
   parentDiv.insertBefore(newDiv, currentDiv);
   document.getElementById("chatbox").value = "";
+  window.scrollTo(0,document.body.scrollHeight);
+
 }
 function sendMessage (Output) {
   // create a new div element 
@@ -132,6 +134,8 @@ function sendMessage (Output) {
   var parentDiv = currentDiv.parentNode;
   parentDiv.insertBefore(newDiv, currentDiv);
   document.getElementById("chatbox").value = "";
+  window.scrollTo(0,document.body.scrollHeight);
+
 }
 function inputSent () {
   var input = document.getElementById('usermsg').value.toString();

@@ -66,14 +66,14 @@ table {
     
 }
 
-h1{
+/*h1{
     color:#01DF3A;
     font-family: 'Merienda One', cursive;
     margin-top:90px;
     text-align:center;
     padding:1em;
     font-size:31px;
-}
+}*/
 #message{
     margin-top:10px;
     margin-left:auto;
@@ -123,7 +123,7 @@ h1{
 
 #message button{margin:1em 0 0 0;}
 
-#message textarea{border:1px solid #A9F5A9; font-family: Tahoma, sans-serif;}
+/*#message textarea{border:1px solid #A9F5A9; font-family: Tahoma, sans-serif;}*/
 
 button{
     border:none;
