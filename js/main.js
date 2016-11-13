@@ -99,11 +99,12 @@ function getAirlinePrices(){
     console.log(data.results[0].itineraries[0].outbound.flights[0].arrives_at);
     var arrival = data.results[loadMore].itineraries[0].outbound.flights[0].arrives_at;
     arrival = arrival.split("T")[0];
-    var depart = data.results[loadMore].itineraries[loadMore].inbound.flights[loadMore].departs_at;
+    var depart = data.results[loadMore].itineraries[0].inbound.flights[0].departs_at;
     depart = depart.split("T")[0];
     var message = "Here is the cheapest plane ticket fitting your criteria: $" + data.results[loadMore].fare.total_price;
     sendMessage(message);
     message = "The plane departs at " + data.results[loadMore].itineraries[0].outbound.flights[0].departs_at.split("T")[1];
+    sendMessage(message);
     getHotelPrices(arrival, depart, data.results[loadMore].fare.total_price);
 
   });
@@ -125,11 +126,27 @@ function getHotelPrices(arrival, depart, airfare){
     var message = "Here is the cheapest hotel fitting your criteria: $" + data.results[loadMore].total_price.amount;
     sendMessage(message);
     var totalPrice = parseFloat(airfare) + parseFloat(data.results[loadMore].total_price.amount);
-    message = "Flight and Hotel expenses add up to $" + totalPrice.toFixed(2);
+    getRentalCarPrices(arrival, depart, totalPrice);
+    }
+  });
+}
+function getRentalCarPrices(arrival, depart, twoprice){
+    
+  var beginURL = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=PrhKy11nSyvwz4Pt0XMVSBcVrmlkr4Nf";
+   // "&location=NCE&pick_up=2016-11-22&drop_off=2016-11-28"
+  var URL = beginURL + "&location=" + destination + "&pick_up=" + arrival + "&drop_off=" + depart +"&number_of_results=5";
+  
+  
+  $.getJSON(URL, function(data) {
+    console.log(data);
+    console.log(data.results[loadMore].cars[0].estimated_total.amount);
+    var message = "Here is the cheapest car rental fitting your criteria: $" + data.results[loadMore].cars[0].estimated_total.amount;
+    sendMessage(message);
+    var totalPrice = parseFloat(twoprice) + parseFloat(data.results[loadMore].cars[0].estimated_total.amount);
+    message = "Everything expenses add up to $" + totalPrice.toFixed(2);
     sendMessage(message);
     message = "Do you want to load more results?"
     sendMessage(message);
-    }
   });
 }
 
