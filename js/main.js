@@ -103,6 +103,7 @@ function getAirlinePrices(){
     depart = depart.split("T")[0];
     var message = "Here is the cheapest plane ticket fitting your criteria: $" + data.results[loadMore].fare.total_price;
     sendMessage(message);
+    message = "The plane departs at " + data.results[loadMore].itineraries[0].outbound.flights[0].departs_at.split("T")[1];
     getHotelPrices(arrival, depart, data.results[loadMore].fare.total_price);
 
   });
@@ -119,6 +120,7 @@ function getHotelPrices(arrival, depart, airfare){
   
   $.getJSON(URL, function(data) {
     console.log(data);
+    if(data.results.length != 0){
     console.log(data.results[loadMore].total_price.amount);
     var message = "Here is the cheapest hotel fitting your criteria: $" + data.results[loadMore].total_price.amount;
     sendMessage(message);
@@ -127,6 +129,7 @@ function getHotelPrices(arrival, depart, airfare){
     sendMessage(message);
     message = "Do you want to load more results?"
     sendMessage(message);
+    }
   });
 }
 
