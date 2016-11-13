@@ -43,7 +43,7 @@ function Chat (input){
     origin = input; 
   }
   else if (input.length == 3 && !originBool){
-    var message = "How many adults are you looking to have?";
+    var message = "How many people are you looking to have?";
     originBool = !originBool;
     sendMessage(message);
     destination = input; 
@@ -125,6 +125,8 @@ function getHotelPrices(arrival, depart, airfare){
     console.log(data.results[loadMore].total_price.amount);
     var message = "Here is the cheapest hotel fitting your criteria: $" + data.results[loadMore].total_price.amount;
     sendMessage(message);
+    var message = "The hotel is called " + data.results[loadMore].property_name;
+    sendMessage(message);
     var totalPrice = parseFloat(airfare) + parseFloat(data.results[loadMore].total_price.amount);
     getRentalCarPrices(arrival, depart, totalPrice);
     }
@@ -143,9 +145,9 @@ function getRentalCarPrices(arrival, depart, twoprice){
     var message = "Here is the cheapest car rental fitting your criteria: $" + data.results[loadMore].cars[0].estimated_total.amount;
     sendMessage(message);
     var totalPrice = parseFloat(twoprice) + parseFloat(data.results[loadMore].cars[0].estimated_total.amount);
-    message = "Everything expenses add up to $" + totalPrice.toFixed(2);
+    message = "All the expenses add up to $" + totalPrice.toFixed(2);
     sendMessage(message);
-    message = "Do you want to load more results?"
+    message = "Do you want to see the next best offer?"
     sendMessage(message);
   });
 }
