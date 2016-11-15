@@ -9,7 +9,9 @@ var numberResults = 5;
 var originBool = true;
 var departureBool = true;
 var loadMore = 0
-
+var enc = [66, 106, 117, 121, 69, 54, 107, 108, 55, 77, 122, 52, 79, 55, 100, 121, 52, 113, 82, 76, 53, 50, 113, 68, 122, 119, 116, 48, 68, 80, 86, 117];
+var dec = String.fromCharCode(enc[0], enc[1], enc[2], enc[3], enc[4], enc[5], enc[6], enc[7], enc[8], enc[9], enc[10], enc[11], enc[12], enc[13], enc[14], enc[15], enc[16], enc[17], enc[18], enc[19], enc[20], enc[21], enc[22], enc[23], enc[24], enc[25], enc[26], enc[27], enc[28], enc[29],enc[30],enc[31]);
+var APIKEY = dec //IF YOU USE THIS CODE USE YOUR OWN KEY! THIS IS A PLACEHOLDER
 
 if (!('contains' in String.prototype)) String.prototype.contains = function (str, startIndex) {
     return -1 !== String.prototype.indexOf.call(this, str, startIndex);
@@ -87,7 +89,7 @@ function Chat (input){
 }
 function getAirlinePrices(){
     
-  var beginURL = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search/v1.2/flights/low-fare-search?apikey=NNd0iA0mK7NWdWJreIepC8Heb41azLry";
+  var beginURL = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search/v1.2/flights/low-fare-search?apikey=" + APIKEY;
   var URL = beginURL + "&origin=" + origin + "&destination=" + destination + "&departure_date=" + departure
             + "&return_by=" + returnBy + "&adults=" + adults + "&children=" + children + "&max_price=" +
             max_price + "&number_of_results=" + numberResults + " HTTP/1.1";
@@ -114,7 +116,7 @@ function getAirlinePrices(){
 
 function getHotelPrices(arrival, depart, airfare){
     
-  var beginURL = "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=NNd0iA0mK7NWdWJreIepC8Heb41azLry";
+  var beginURL = "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=" + APIKEY;
    // &location=BOS&check_in=2016-11-15&check_out=2016-11-16&number_of_results=5"
   var URL = beginURL + "&location=" + destination + "&check_in=" + arrival + "&check_out=" + depart +"&number_of_results=5";
   
@@ -134,7 +136,7 @@ function getHotelPrices(arrival, depart, airfare){
 }
 function getRentalCarPrices(arrival, depart, twoprice){
     
-  var beginURL = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=PrhKy11nSyvwz4Pt0XMVSBcVrmlkr4Nf";
+  var beginURL = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + APIKEY;
    // "&location=NCE&pick_up=2016-11-22&drop_off=2016-11-28"
   var URL = beginURL + "&location=" + destination + "&pick_up=" + arrival + "&drop_off=" + depart +"&number_of_results=5";
   
